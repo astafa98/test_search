@@ -22,9 +22,8 @@ function App() {
       setViewResultMode(true);
       const cleanData = data.query.replace(/\s+/g, "").toLowerCase();
       const res = await queryImage({ query: cleanData }).unwrap();
-      console.log(res);
     } catch (error) {
-      alert(error);
+      alert("error");
     }
   };
   return (
