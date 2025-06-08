@@ -27,7 +27,7 @@ export default function Popup({ open, onClose, children }: PopupProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute top-2 right-1 cursor-pointer"
+          className="absolute top-1 right-1 cursor-pointer"
           onClick={onClose}
           aria-label="Закрыть"
         >

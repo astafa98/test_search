@@ -18,7 +18,7 @@ export const queryApi = createApi({
   endpoints: (builder) => ({
     queryImage: builder.mutation<Welcome, ISearchForm>({
       query: (body) => ({
-        url: `search/photos?client_id=Ip0XA55zY7b7-d19osq1L5btGg-YCeDZVpnnJjXqHxs&query=${body.query}`,
+        url: `search/photos?client_id=Ip0XA55zY7b7-d19osq1L5btGg-YCeDZVpnnJjXqHxs&query=${body.query}&page=${body.page}`,
         method: "GET",
       }),
     }),

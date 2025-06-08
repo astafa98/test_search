@@ -1,5 +1,6 @@
 export interface ISearchForm {
   query: string;
+  page?: number;
 }
 
 export interface Welcome {
