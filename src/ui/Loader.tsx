@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <div className="flex items-center justify-center  h-[90vh] w-full">
+    <div className="flex items-center justify-center h-[60vh] w-full">
       <div className="relative w-10 h-10">
         {[...Array(8)].map((_, i) => (
           <div
