@@ -25,7 +25,6 @@ function App() {
   const onSubmit = async (formData: ISearchForm) => {
     setViewResultMode(true);
     const cleanData = formData.query.replace(/\s+/g, "").toLowerCase();
-
     setSearchQuery(cleanData);
     setCurrentPage(1);
   };
@@ -37,7 +36,7 @@ function App() {
   }, [searchQuery, currentPage, queryImage]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className=" h-[90vh] flex flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div
