@@ -33,10 +33,10 @@ function App() {
     if (searchQuery) {
       queryImage({ query: searchQuery, page: currentPage });
     }
-  }, [searchQuery, currentPage, queryImage]);
+  }, [searchQuery, currentPage]);
 
   return (
-    <div className=" h-[90vh] flex flex-col">
+    <div className=" h-[80vh] flex flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div
