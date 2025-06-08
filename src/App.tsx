@@ -8,8 +8,9 @@ import Loader from "./ui/Loader";
 import Popup from "./ui/Popup";
 
 function App() {
-  const { register, handleSubmit, formState, watch, reset } =
-    useForm<ISearchForm>({ mode: "onChange" });
+  const { register, handleSubmit, watch, reset } = useForm<ISearchForm>({
+    mode: "onChange",
+  });
   const [viewResultMode, setViewResultMode] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupImg, setPopupImg] = useState<string | null>(null);
