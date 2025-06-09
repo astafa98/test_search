@@ -24,7 +24,7 @@ export default function SearchInput({
           required: true,
         })}
         type="text"
-        className="h-12 w-full bg-[#EEEEEE] rounded-[12px] pl-8 pr-8 border-none text-base placeholder:text-[#9C9C9C] focus:outline-none font-sfpro flex items-center"
+        className="h-12 w-full bg-[#EEEEEE] hover:bg-[#E6E6E6] rounded-[12px] pl-8 pr-8 border-none text-base placeholder:text-[#9C9C9C] focus:outline-none font-sfpro flex items-center"
         style={{
           display: "flex",
           alignItems: "center",
