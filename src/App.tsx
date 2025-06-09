@@ -2,12 +2,13 @@ import Button from "./ui/Button";
 import SearchInput from "./ui/SearchInput";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import type { ISearchForm } from "./types";
+import type { ISearchForm, Welcome } from "./types";
 import { useQueryImageMutation } from "./api/queryApi";
 import Loader from "./ui/Loader";
 import Popup from "./ui/Popup";
 import Pagination from "./ui/Pagination";
 import { motion } from "framer-motion";
+import { useDeviceType } from "./hooks/useDeviceType";
 
 function App() {
   const { register, handleSubmit, watch, reset } = useForm<ISearchForm>({
@@ -18,9 +19,11 @@ function App() {
   const [popupImg, setPopupImg] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [allResults, setAllResults] = useState<null | Welcome>();
   const watchQuery = watch("query");
 
   const [queryImage, { isLoading, data }] = useQueryImageMutation();
+  const deviceType = useDeviceType();
 
   const onSubmit = async (formData: ISearchForm) => {
     setViewResultMode(true);
@@ -28,6 +31,11 @@ function App() {
     setSearchQuery(cleanData);
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    setAllResults(data);
+    return () => {};
+  }, [data]);
 
   useEffect(() => {
     if (searchQuery) {
@@ -44,16 +52,22 @@ function App() {
             style={{ willChange: "transform" }}
           >
             <div
-              className={`flex gap-2 transition-all duration-500 w-full px-4 justify-center items-center ${
-                viewResultMode ? "translate-y-2" : "translate-y-70"
+              className={`flex gap-2 transition-all duration-500 w-full items-center mt-4 ${
+                viewResultMode ? "justify-start" : "justify-center"
+              } ${viewResultMode ? "translate-y-2" : "translate-y-70"} ${
+                viewResultMode && deviceType === "desktop"
+                  ? "pl-[5rem]"
+                  : "px-4"
               }`}
             >
-              <SearchInput
-                placeholder="Телефоны, яблоки, груши..."
-                register={register}
-                watchQuery={watchQuery}
-                reset={reset}
-              />
+              <div className="w-full md:w-[26rem]">
+                <SearchInput
+                  placeholder="Телефоны, яблоки, груши..."
+                  register={register}
+                  watchQuery={watchQuery}
+                  reset={reset}
+                />
+              </div>
               <Button onSubmit={() => onSubmit} />
             </div>
           </div>
@@ -62,9 +76,13 @@ function App() {
         {isLoading && <Loader />}
       </form>
       {/* Grid for images */}
-      <div className="w-full px-4 mt-8 grid grid-cols-3 gap-1  sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10">
-        {data?.total !== 0 ? (
-          data?.results.map((item) => (
+      <div
+        className={`w-full mt-8 grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 ${
+          deviceType === "desktop" ? "px-[5rem]" : "px-4"
+        }`}
+      >
+        {allResults?.total !== 0 ? (
+          allResults?.results.map((item) => (
             <motion.div
               key={item.id}
               className="relative aspect-square cursor-pointer"
@@ -94,15 +112,11 @@ function App() {
       </div>
       <Popup open={popupOpen} onClose={() => setPopupOpen(false)}>
         {popupImg && (
-          <img
-            src={popupImg}
-            alt="popup"
-            className="max-w-full max-h-[80vh] rounded-xl"
-          />
+          <img src={popupImg} alt="popup" className="max-w-full max-h-[80vh]" />
         )}
       </Popup>
       {/* Пагинация */}
-      <div className="mt-auto">
+      {/* <div className="mt-auto">
         {viewResultMode && data && data?.total_pages > 1 && (
           <Pagination
             currentPage={currentPage}
@@ -110,7 +124,7 @@ function App() {
             onPageChange={setCurrentPage}
           />
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

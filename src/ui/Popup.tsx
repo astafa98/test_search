@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useDeviceType } from "../hooks/useDeviceType";
 
 interface PopupProps {
   open: boolean;
@@ -8,10 +9,11 @@ interface PopupProps {
 
 export default function Popup({ open, onClose, children }: PopupProps) {
   const contentRef = useRef<HTMLDivElement>(null);
+  const deviceType = useDeviceType();
   if (!open) return null;
   return (
     <div
-      className="min-h-[60vh] fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      className="min-h-[60vh] fixed inset-0 z-50 flex items-center justify-center bg-black/60"
       onClick={(e) => {
         if (
           contentRef.current &&
@@ -23,7 +25,12 @@ export default function Popup({ open, onClose, children }: PopupProps) {
     >
       <div
         ref={contentRef}
-        className="bg-white rounded-xl shadow-xl p-6 relative w-full max-w-[1200px] min-h-[60vh] min-w-[320px] max-h-[90vh] flex flex-col items-center justify-center"
+        className={`relative w-full max-w-[1200px] min-h-[60vh] min-w-[320px] max-h-[90vh] flex flex-col items-center justify-center p-6 
+          ${
+            deviceType === "desktop"
+              ? "bg-transparent rounded-none"
+              : "bg-white "
+          }`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
