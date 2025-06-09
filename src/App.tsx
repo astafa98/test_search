@@ -110,11 +110,13 @@ function App() {
           </div>
         )}
       </div>
+
       <Popup open={popupOpen} onClose={() => setPopupOpen(false)}>
         {popupImg && (
           <img src={popupImg} alt="popup" className="max-w-full max-h-[80vh]" />
         )}
       </Popup>
+
       {/* Пагинация */}
       {/* <div className="mt-auto">
         {viewResultMode && data && data?.total_pages > 1 && (
