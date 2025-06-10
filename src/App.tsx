@@ -6,7 +6,7 @@ import type { ISearchForm, Welcome } from "./types";
 import { useQueryImageMutation } from "./api/queryApi";
 import Loader from "./ui/Loader";
 import Popup from "./ui/Popup";
-// import Pagination from "./ui/Pagination";
+ import Pagination from "./ui/Pagination";
 import { motion } from "framer-motion";
 import { useDeviceType } from "./hooks/useDeviceType";
 
