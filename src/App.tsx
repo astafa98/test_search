@@ -117,8 +117,8 @@ function App() {
         )}
       </Popup>
 
-      {/* Пагинация */}
-      {/* <div className="mt-auto">
+  
+       <div className="mt-auto">
         {viewResultMode && data && data?.total_pages > 1 && (
           <Pagination
             currentPage={currentPage}
@@ -126,7 +126,7 @@ function App() {
             onPageChange={setCurrentPage}
           />
         )}
-      </div> */}
+      </div> 
     </div>
   );
 }
